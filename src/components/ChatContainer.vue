@@ -37,15 +37,11 @@ export default {
       messagesRef: function() {
           return ref(db, `messages/`)
       },
-      newMessageRef: function() {
-        return ref(db, `messages/${Date.now()}`)
-      }
   },
   mounted: function () {
     onValue(this.messagesRef, (snapshot) => {
-      console.log(snapshot)
       const data = snapshot.val();
-      console.log(data)
+
       if (!data) {
         return;
       }
@@ -61,7 +57,8 @@ export default {
   },
   methods: {
     sendMessage: function () {
-      set(this.newMessageRef, {
+
+      const newMessage = {
         user: {
           name: this.user.displayName,
           uid: this.user.uid,
@@ -69,7 +66,11 @@ export default {
         },
         message: this.newMessage,
         timestamp: Date.now(),
-      });
+      }
+
+      this.data = [...this.data, newMessage]
+      
+      set(this.messagesRef, this.data);
     },
   },
 };
