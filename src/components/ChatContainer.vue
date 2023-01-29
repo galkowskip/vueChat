@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="chat-grid"> 
+    <chat-sidebar />
     <div class="list">
       <chat-message
         v-for="(item, index) in data"
@@ -9,7 +10,7 @@
         :isActiveUsers="item.user.uid === user.uid"
       />
     </div>
-    <div>
+    <div class="chat-controls">
       <input type="text" v-model="newMessage" />
       <button @click="sendMessage">Send</button>
     </div>
@@ -21,9 +22,10 @@ import { ref, set, onValue } from "firebase/database";
 import { db } from "../firebase";
 
 import ChatMessage from "./ChatMessage.vue";
+import ChatSidebar from "./ChatSidebar.vue"
 
 export default {
-  components: { ChatMessage },
+  components: { ChatMessage, ChatSidebar },
   props: {
     user: Object,
   },
@@ -69,17 +71,35 @@ export default {
       }
 
       this.data = [...this.data, newMessage]
-      
+
       set(this.messagesRef, this.data);
     },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .list {
     width: 100%;
     display: flex;
     flex-direction: column;
+    grid-column: 2/3;
+}
+.chat-grid {
+  min-height: calc(100vh - 80px);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr 40px;
+}
+.chat-controls {
+grid-row: 2/3;
+grid-column: 1/3;
+display: flex;
+  input {
+    width: calc(100vw - 100px)
+  }
+  button {
+    width: 100px;
+  }
 }
 </style>

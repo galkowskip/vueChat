@@ -1,20 +1,13 @@
-
 const firestore = require('firebase-admin').firestore()
 const collectionRef = firestore.collection('users');
 
-
-
-
 exports.createUserInDatabase = function createUserInDatabase(user) {
 
-
-    console.log(user)
     const newUser = {
         displayName: user.displayName,
-        email: user.email
+        email: user.email,
+        id: user.uid
     }
-
-    console.log(newUser)
 
     collectionRef.add(newUser)
         .then(docRef => {

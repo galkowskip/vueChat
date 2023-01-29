@@ -45,5 +45,8 @@ export default {
   background: gainsboro;
   border-bottom: gray;
   color: black;
+  justify-content: space-between;
+  padding: 8px 24px;
+  align-items: center;
 }
 </style>

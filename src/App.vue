@@ -1,8 +1,9 @@
 <template>
   <div>
-    <navbar :user="user" @sign-out="signOut"/>
-
-    <RouterView :user="user" />
+    <navbar :user="user" @sign-out="signOut" />
+    <div>
+      <RouterView :user="user" />
+    </div>
   </div>
 </template>
 
@@ -20,17 +21,17 @@ export default {
       user: {},
     };
   },
-  methods:  {
-    refreshUser: async function() {
+  methods: {
+    refreshUser: async function () {
       this.user = await getCurrentUser();
     },
     signOut: function () {
-      this.refreshUser()
-      this.$route.push({name: 'login'})
-    }
+      this.refreshUser();
+      this.$route.push({ name: "login" });
+    },
   },
   mounted: async function () {
-    this.refreshUser()
+    this.refreshUser();
   },
 };
 </script>
