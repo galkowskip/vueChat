@@ -30,32 +30,38 @@ export default {
   data: function () {
     return {
       newMessage: "",
-    //   messagesRef: ref(db, "messages/"),
       data: [],
     };
   },
   computed: {
       messagesRef: function() {
-          return  ref(db, `messages/${Date.now()}`)
+          return ref(db, `messages/`)
+      },
+      newMessageRef: function() {
+        return ref(db, `messages/${Date.now()}`)
       }
   },
   mounted: function () {
     onValue(this.messagesRef, (snapshot) => {
+      console.log(snapshot)
       const data = snapshot.val();
+      console.log(data)
       if (!data) {
         return;
       }
 
       if (typeof data === "object" && Object.keys(data).length) {
         this.data = [...this.data, data];
-      } else {
-        this.data = [...this.data, ...data];
+
+        this.data = Object.keys(data).map(item => {
+          return data[item]
+        })
       }
     });
   },
   methods: {
     sendMessage: function () {
-      set(this.messagesRef, {
+      set(this.newMessageRef, {
         user: {
           name: this.user.displayName,
           uid: this.user.uid,
