@@ -14,14 +14,14 @@ const googleProvider = new GoogleAuthProvider();
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBC_JXGTRx8TcChWIfcQ5hDuVlY63eokSM",
-    authDomain: "vuechat-96529.firebaseapp.com",
-    databaseURL: "https://vuechat-96529-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "vuechat-96529",
-    storageBucket: "vuechat-96529.appspot.com",
-    messagingSenderId: "941759698743",
-    appId: "1:941759698743:web:e109ba01567d8198dc2cb2",
-    measurementId: "G-584NMNZ7TX"
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_DATABASE_URL,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID,
+    measurementId: import.meta.env.VITE_MEASUREMENT_ID
   };
   
 
